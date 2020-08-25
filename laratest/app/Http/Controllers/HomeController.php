@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    /*function __construct(){
+        //session
+    }*/
     
-    function index(){
+    function index(Request $request){
 
     	/*$data  = ['id'=>'1233', 'name'=>'alamin'];
     	return view('home.index', $data);*/
@@ -25,8 +29,14 @@ class HomeController extends Controller
     	$v->withId('1234');
     	return $v;*/
 
-    	$users = $this->getStudentList();
-		return view('home.index')->with('users', $users);
+        if($request->session()->has('username')){
+            $users = $this->getStudentList();
+            return view('home.index')->with('users', $users);
+        }else{
+            $request->session()->flash('msg', 'invalid request');
+            return redirect('/login');
+        }
+
     }
 
     function edit($id){
@@ -57,8 +67,9 @@ class HomeController extends Controller
 
     	$users = $this->getStudentList();
     	//show comfirm view
-
-    	return view('home.delete')->with('user', $user);
+        $user = ['id'=>'2', 'name'=>'abc','email'=>'abc@aiub.com', 'password'=>'456'];
+    	
+        return view('home.delete')->with('user', $user);
 
     }
 
@@ -70,7 +81,6 @@ class HomeController extends Controller
 
     	return view('home.index')->with('users', $users);
     }
-
 
     function getStudentList(){
     	return  [

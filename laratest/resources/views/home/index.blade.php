@@ -7,6 +7,8 @@
 
 	<h1>Welcome home!</h1>
 
+	<a href="/home/create">Create User</a> |
+	<a href="/logout">logout</a>
 
 	<h2>user list</h2>
 
@@ -27,8 +29,7 @@
 			<td>{{$users[$i]['password']}}</td>
 			<td>
 				<a href="/home/edit/{{$users[$i]['id']}}">Edit</a> |
-				<a href="/home/delete/{{$users[$i]['id']}}">Delete</a> |
-				<a href="/home/details/{{$users[$i]['id']}}">Details</a> |
+				<a href="/home/delete/{{$users[$i]['id']}}">Delete</a>
 			</td>
 		</tr>
 	@endfor
