@@ -29,22 +29,14 @@ class HomeController extends Controller
     	$v->withId('1234');
     	return $v;*/
 
-        if($request->session()->has('username')){
-            $users = $this->getStudentList();
-            return view('home.index')->with('users', $users);
-        }else{
-            $request->session()->flash('msg', 'invalid request');
-            return redirect('/login');
-        }
-
+        $users = $this->getStudentList();
+        return view('home.index')->with('users', $users);
     }
 
     function edit($id){
 
     	$users = $this->getStudentList();
-
     	//find one student by ID from array
-
     	$user = ['id'=>'2', 'name'=>'abc','email'=>'abc@aiub.com', 'password'=>'456'];
     	return view('home.edit')->with('user', $user);
 
@@ -55,7 +47,6 @@ class HomeController extends Controller
     	$newUser = ['id'=>$id, 'name'=>$request->name,'email'=>$request->email, 'password'=>$request->password];
 
     	$users = $this->getStudentList();
-    	
     	//find one student by ID from array $& replace it's value
 		//updated list
 
