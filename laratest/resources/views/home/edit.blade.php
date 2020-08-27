@@ -8,6 +8,8 @@
 	<h1>Edit user page</h1>
 
 	<form method="post">
+		
+		{{csrf_field()}}
 		<table>
 			<tr>
 				<td>Name</td>
