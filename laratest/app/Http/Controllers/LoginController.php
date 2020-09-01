@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
+
 
 class LoginController extends Controller
 {
     
     function index(){
-
     	return view('login.index');
     }
 
@@ -32,24 +33,31 @@ class LoginController extends Controller
             $request->session()->pull('username');*/
 
 
-        $user = new User();
+        //$user = new User();
         //$data = $user->all();
-        $data = $user->where('username', $request->username)
+       /* $data = User::where('username', $request->username)
                         ->where('password', $request->password)
-                        ->get();
+                        ->get();*/
+        
+        $data = DB::table('user_table')
+                    ->where('username', $request->username)
+                    ->where('password', $request->password)
+                    ->get();
 
+        //print_r($data);
         //echo $data[0]->type;
 
     	if(count($data) > 0 ){
             $request->session()->put('username', $request->username);
-            if($request->username == $data[0]['type']){
+            
+            if($data[0]->type == "admin"){
                 $request->session()->put('type', "admin");
             }
-    		return redirect('/home');
 
+    		return redirect()->route('home.index');
     	}else{
             $request->session()->flash('msg', 'invalid username/password');
-            return redirect('/login');
+            return redirect()->route('login.index');
         }
     }
 }

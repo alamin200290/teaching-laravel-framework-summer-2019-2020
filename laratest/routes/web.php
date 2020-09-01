@@ -15,15 +15,13 @@ Route::get('/', function () {
     echo "index page";
 });
 
-
 Route::get('/welcome', function(){
 	return view('test');
 });
 
-
-Route::get('/login', 'LoginController@index');
+Route::get('/login', 'LoginController@index')->name('login.index');
 Route::post('/login', ['uses'=>'LoginController@verify']);
-Route::get('/logout', ['uses'=>'logoutController@index']);
+Route::get('/logout', ['as'=>'logout.index', 'uses'=>'logoutController@index']);
 
 
 /*Route::group(['middleware'=>'sess'], function(){
@@ -34,15 +32,16 @@ Route::get('/logout', ['uses'=>'logoutController@index']);
 	Route::post('/home/delete/{id}', 'HomeController@destroy')->middleware('sess');
 });*/
 
-
 Route::middleware(['sess'])->group(function(){
 
-	Route::get('/home', 'HomeController@index');
+	Route::get('/xyz', 'HomeController@index')->name('home.index');
 
 	Route::group(['middleware'=>['type']], function(){
-		Route::get('/home/edit/{id}', 'HomeController@edit');
-		Route::post('/home/edit/{id}', 'HomeController@update');
-		Route::get('/home/delete/{id}', 'HomeController@delete');
+		Route::get('/admin/create', 'HomeController@create')->name('home.create');
+		Route::post('/admin/create', 'HomeController@store');
+		Route::get('/admin/edit/{id}', 'HomeController@edit')->name('home.edit');
+		Route::post('/admin/edit/{id}', 'HomeController@update');
+		Route::get('/home/delete/{id}', 'HomeController@delete')->name('home.delete');
 		Route::post('/home/delete/{id}', 'HomeController@destroy');
 	});
 });
