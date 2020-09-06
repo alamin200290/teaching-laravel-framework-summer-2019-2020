@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Create User</title>
-</head>
-<body>
+@extends('layout.navbar')
 
+@section('title')
+Create page
+@endsection
+
+
+@section('content1')
 	<h1>Create New user</h1>
 	<a href="{{route('home.index')}}">Back</a>
 
-	<form method="post">
+	<form method="post" enctype="multipart/form-data">
 		
 		{{csrf_field()}}
 		<table>
@@ -40,6 +41,10 @@
 				<td><input type="text" name="cgpa" value="{{old('cgpa')}}" ></td>
 			</tr>
 			<tr>
+				<td>Document Upload:</td>
+				<td><input type="file" name="myfile" ></td>
+			</tr>
+			<tr>
 				<td></td>
 				<td><input type="submit" name="submit" value="Save"></td>
 			</tr>
@@ -49,5 +54,5 @@
 	@foreach($errors->all() as $err)
 		{{$err}} <br>
 	@endforeach
-</body>
-</html>
+
+@endsection

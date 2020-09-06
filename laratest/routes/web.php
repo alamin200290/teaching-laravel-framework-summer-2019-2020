@@ -44,5 +44,8 @@ Route::middleware(['sess'])->group(function(){
 		Route::get('/home/delete/{id}', 'HomeController@delete')->name('home.delete');
 		Route::post('/home/delete/{id}', 'HomeController@destroy');
 	});
+	
 });
 
+
+	Route::resource('account', 'AccountController');

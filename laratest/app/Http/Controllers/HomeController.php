@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Requests\UserRequests;
 use Illuminate\Support\Facades\DB;
 
 //use Validator;
@@ -76,24 +77,37 @@ class HomeController extends Controller
         //$validation->validate();
 
 
-        $request->validate([
+/*        $request->validate([
             'username'  => 'required|max:5',
             'name'      => 'required',
             'password'  => 'required',
             'type'      => 'required',
             'cgpa'      => 'required'
-        ])->validate();
+        ])->validate();*/
 
-
-        $user = new User();
+       /* $user = new User();
         $user->username     = $request->username;
         $user->name         = $request->name;
         $user->password     = $request->password;
         $user->type         = $request->type;
         $user->cgpa         = $request->cgpa;
         $user->dept         = $request->dept;
-        $user->save();
+        $user->save();*/
 
+        if($request->hasFile('myfile')){
+            $file = $request->file('myfile');
+            echo "File Name: ". $file->getClientOriginalName()."<br>";
+            echo "File Extension: ". $file->getClientOriginalExtension()."<br>";
+            echo "File Size: ". $file->getSize()."<br>";
+            echo "File Mime Type: ". $file->getMimeType();
+
+            if($file->move('upload', $file->getClientOriginalName())){
+                echo "<h1>success</h1>";
+            }else{
+                echo "<h1>Error!</h1>";
+            }
+        }
+        
         return redirect()->route('home.index');
     }
 
