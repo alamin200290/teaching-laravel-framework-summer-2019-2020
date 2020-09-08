@@ -13,6 +13,7 @@ Home page
 		<td>Username</td>
 		<td>Password</td>
 		<td>Type</td>
+		<td>Account No</td>
 		<td>Action</td>
 	</tr>
 
@@ -21,6 +22,7 @@ Home page
 		<td>{{$users[$i]->userId}}</td>
 		<td>{{$users[$i]->username}}</td>
 		<td>{{$users[$i]->password}}</td>
+		<td>{{$users[$i]->accNo}}</td>
 		<td>{{$users[$i]->type}}</td>
 		<td>
 			<a href="{{route('home.edit', [$users[$i]->userId])}}">Edit</a> |

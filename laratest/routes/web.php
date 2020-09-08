@@ -43,9 +43,14 @@ Route::middleware(['sess'])->group(function(){
 		Route::post('/admin/edit/{id}', 'HomeController@update');
 		Route::get('/home/delete/{id}', 'HomeController@delete')->name('home.delete');
 		Route::post('/home/delete/{id}', 'HomeController@destroy');
+		
+		Route::resource('account', 'AccountController');
 	});
 	
 });
 
+Route::resource('products', 'ProductController');
 
-	Route::resource('account', 'AccountController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
