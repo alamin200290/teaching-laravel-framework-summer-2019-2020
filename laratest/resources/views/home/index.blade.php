@@ -22,8 +22,8 @@ Home page
 		<td>{{$users[$i]->userId}}</td>
 		<td>{{$users[$i]->username}}</td>
 		<td>{{$users[$i]->password}}</td>
-		<td>{{$users[$i]->accNo}}</td>
 		<td>{{$users[$i]->type}}</td>
+		<td>{{$users[$i]->accNo}}</td>
 		<td>
 			<a href="{{route('home.edit', [$users[$i]->userId])}}">Edit</a> |
 			<a href="{{route('home.delete', [$users[$i]->userId])}}">Delete</a>
