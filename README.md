@@ -1,1 +1,1 @@
-# summer_2020_laravel
+# teaching-laravel-framework-summer-2019-2020
